@@ -1,1 +1,174 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analisisbetchile | Deportes</title>
+<style>
+:root {
+  --bg: #080b0b;
+  --panel: #111817;
+  --green: #b7ff35;
+  --text: #f4f7f4;
+  --muted: #89938e;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+header {
+  padding: 22px 18px;
+  border-bottom: 1px solid #26302b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo { font-size: 21px; font-weight: 900; }
+.logo span { color: var(--green); }
+.status { color: var(--green); font-size: 11px; }
+main { max-width: 1100px; margin: auto; padding: 22px 15px; }
+h1 { font-size: 27px; margin-bottom: 7px; }
+.subtitle { color: var(--muted); font-size: 14px; }
+.tabs {
+  display: flex;
+  gap: 9px;
+  margin: 25px 0 15px;
+  flex-wrap: wrap;
+}
+button {
+  border: 1px solid #303a35;
+  background: var(--panel);
+  color: white;
+  padding: 12px 17px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+button.active {
+  background: var(--green);
+  color: #101510;
+  border-color: var(--green);
+  font-weight: bold;
+}
+.filters { display: flex; gap: 8px; margin: 15px 0; flex-wrap: wrap; }
+.filters button { font-size: 12px; padding: 9px 13px; }
+.panel {
+  background: var(--panel);
+  border: 1px solid #26312c;
+  border-radius: 13px;
+  padding: 20px;
+  margin-top: 15px;
+}
+.panel h2 { margin-top: 0; font-size: 18px; }
+.empty {
+  text-align: center;
+  padding: 35px 10px;
+  color: var(--muted);
+}
+.empty strong { display: block; color: white; margin-bottom: 8px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.stat {
+  background: #0b100e;
+  border: 1px solid #26312c;
+  border-radius: 10px;
+  padding: 16px;
+}
+.stat small { color: var(--muted); }
+.stat strong { display: block; font-size: 23px; margin-top: 8px; }
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px 10px;
+  font-size: 12px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ANALISIS<span>BET</span>CHILE</div>
+  <div class="status">● CENTRO DEPORTIVO</div>
+</header>
+
+<main>
+  <h1>Centro de estadísticas</h1>
+  <p class="subtitle">Resultados, encuentros y estadísticas deportivas.</p>
+
+  <div class="tabs">
+    <button class="active" onclick="cambiarDeporte('football',this)">⚽ Fútbol</button>
+    <button onclick="cambiarDeporte('basketball',this)">🏀 Básquetbol</button>
+    <button onclick="cambiarDeporte('tennis',this)">🎾 Tenis</button>
+  </div>
+
+  <div class="filters">
+    <button class="active" onclick="cambiarFiltro('todos',this)">Todos</button>
+    <button onclick="cambiarFiltro('live',this)">En vivo</button>
+    <button onclick="cambiarFiltro('upcoming',this)">Próximos</button>
+    <button onclick="cambiarFiltro('finished',this)">Finalizados</button>
+  </div>
+
+  <section class="panel">
+    <h2 id="titulo">⚽ Partidos de fútbol</h2>
+    <div class="empty">
+      <strong>Conexión de datos pendiente</strong>
+      Aquí aparecerán los partidos y resultados reales
+      cuando conectemos las fuentes deportivas.
+    </div>
+  </section>
+
+  <div class="grid">
+    <div class="stat">
+      <small>Deporte seleccionado</small>
+      <strong id="deporte">Fútbol</strong>
+    </div>
+    <div class="stat">
+      <small>Estado de conexión</small>
+      <strong style="color:var(--green)">Pendiente</strong>
+    </div>
+  </div>
+
+  <section class="panel">
+    <h2>Inteligencia deportiva</h2>
+    <p class="subtitle">
+      Análisis descriptivo de estadísticas, rendimiento reciente
+      y tendencias de los equipos y jugadores.
+    </p>
+  </section>
+</main>
+
+<footer>ANALISISBETCHILE · Estadísticas deportivas</footer>
+
+<script>
+let deporteActual = "football";
+
+function cambiarDeporte(deporte, boton) {
+  deporteActual = deporte;
+  document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
+  boton.classList.add("active");
+
+  const nombres = {
+    football: ["⚽ Partidos de fútbol", "Fútbol"],
+    basketball: ["🏀 Partidos de básquetbol", "Básquetbol"],
+    tennis: ["🎾 Partidos de tenis", "Tenis"]
+  };
+
+  document.getElementById("titulo").textContent = nombres[deporte][0];
+  document.getElementById("deporte").textContent = nombres[deporte][1];
+}
+
+function cambiarFiltro(filtro, boton) {
+  document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+  boton.classList.add("active");
+}
+</script>
+
+</body>
+</html>
